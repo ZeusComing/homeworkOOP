@@ -6,7 +6,9 @@ public class Group {
 
     public void addToGroup(Student student) {
         try {
-            if (count > 9) {
+            if (student == null) {
+                throw new IllegalArgumentException("Sorry");
+            } else if (count > 9) {
                 throw new MyException();
             } else {
                 for (int i = 0; i < group.length; i++) {
@@ -27,7 +29,7 @@ public class Group {
 
     public void removeStudentFromGroup (Student student) {
         for (int i = 0; i < group.length; i++) {
-            if (group[i] == student) {
+            if (group[i].equals(student)) {
                 count--;
                 group[i] = group[count];
                 group[count] = null;
