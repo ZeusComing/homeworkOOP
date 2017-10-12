@@ -41,21 +41,14 @@ public class Group {
         }
     }
 
-    public void searchStudent(String lastName) {
-        boolean check = false;
-        try {
-            for (int i = 0; i < group.length; i++) {
-                if (group[i].getLastName() == lastName) {
-                    check = true;
-                    System.out.println(group[i].toString());
-                    break;
+    public Student searchStudent(String lastName) {
+        for (int i = 0; i < count; i++) {
+            if (group[i].getLastName() == lastName) {
+                return group[i];
                 }
             }
-        } catch (NullPointerException e) {
-        }
-        if (!check) {
-            System.out.println(lastName + " not in the group");
-        }
+        System.out.println(lastName + " not in the group");
+        return null;
     }
 
     @Override
