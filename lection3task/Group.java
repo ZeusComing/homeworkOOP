@@ -24,8 +24,8 @@ public class Group implements Voenkomat {
                 for (int i = 0; i < group.length; i++) {
                     if (group[i] == null) {
                         group[i] = student;
-                        System.out.println(student.getFirstName() + " " +
-                                student.getLastName() + " is added to group");
+                        System.out.println(student.getFirstName() + " "
+                                + student.getLastName() + " is added to group");
                         count++;
                         break;
                     }
@@ -37,7 +37,8 @@ public class Group implements Voenkomat {
     }
 
     public void addToGroupInteractive() {
-        addToGroup(newStudent());
+        addToGroup(new Student(setFirstName(), setLastName(), setAge(),
+                setSex(), setCourse(), setFaculty()));
     }
 
     public void removeStudentFromGroup (Student student) {
@@ -46,9 +47,9 @@ public class Group implements Voenkomat {
                 count--;
                 group[i] = group[count];
                 group[count] = null;
-                System.out.println("Student " + student.getLastName() +
-                        " removed from group. " + "Now group have " + (group.length - count) +
-                        " slot(s).");
+                System.out.println("Student " + student.getLastName()
+                        + " removed from group. " + "Now group have "
+                        + (group.length - count) + " slot(s).");
                 break;
             }
         }
@@ -66,8 +67,7 @@ public class Group implements Voenkomat {
 
     public void sortByParameter() {
         System.out.println("Avaliable parameters: first name, last name, age, course");
-        Scanner sc = new Scanner(System.in);
-        String p = sc.nextLine().toLowerCase();
+        String p = inputLine().toLowerCase();
         switch (p) {
             case ("first name"):
                 Arrays.sort(group, 0, count - 1, (studentOne, studentTwo) ->
@@ -87,8 +87,6 @@ public class Group implements Voenkomat {
                 break;
             default:
                 System.out.println("Wrong parameter");
-
-
         }
     }
 
@@ -103,69 +101,90 @@ public class Group implements Voenkomat {
         return result;
     }
 
-    private Student newStudent() {
+    private String setFirstName() {
         String firstName;
-        String lastName;
-        int age;
-        String sex;
-        int course;
-        String faculty;
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Enter first name");
-        for (;;) {
-            firstName = scanner.nextLine() ;
-            if (firstName.length() >= 1) {
-                break;
-            }
-        }
+        firstName = inputLine();
+        return firstName;
+    }
+
+    private String setLastName() {
+        String lastName;
         System.out.println("Enter last name");
-        for (;;) {
-            lastName = scanner.nextLine();
-            if (lastName.length() >= 1) {
-                break;
-            }
-        }
+        lastName = inputLine();
+        return lastName;
+    }
+
+    private int setAge() {
+        int age;
         System.out.println("Enter age");
-        for (;;) {
-            try {
-                age = (int) scanner.nextDouble();
-                if (age >= 1) {
-                    break;
-                }
-                System.out.println("Age can't be 0 or negative");
-            } catch (InputMismatchException e) {
-                System.out.println("It's not number");
-                scanner.skip(".*");
-            }
-        }
+        age = (int) inputNumber();
+        return age;
+    }
+
+    private String setSex() {
+        String sex;
         System.out.println("Enter sex (male/female)");
         for (;;) {
-            sex = scanner.nextLine();
+            sex = inputLine().toLowerCase();
             if (sex.equals("male") || sex.equals("female")) {
                 break;
             }
             System.out.println(" \"male\" or \"female\"");
         }
+        return sex;
+    }
+
+    private int setCourse() {
+        int course;
         System.out.println("Enter course");
         for (;;) {
-            try {
-                course = (int) scanner.nextDouble();
-                if ((course >= 1) && (course <= 6)) {
-                    break;
-                }
-                System.out.println("Course can't be negative or bigger then 6");
-            } catch (InputMismatchException e) {
-                System.out.println("It's not number");
-                scanner.skip(".*");
+            course = (int) inputNumber();
+            if (course <= 6) {
+                break;
+            } else {
+                System.out.println("Course can't be higher then 6");
             }
         }
+        return course;
+    }
+
+    private String setFaculty() {
+        String faculty;
         System.out.println("Enter faculty");
+        faculty = inputLine();
+        return faculty;
+    }
+
+    private String inputLine() {
+        String line;
+        Scanner sc = new Scanner(System.in);
         for (;;) {
-            faculty = scanner.nextLine();
-            if (faculty.length() > 0) {
+            line = sc.nextLine() ;
+            if (line.length() >= 1) {
                 break;
             }
         }
-        return new Student(firstName, lastName, age, sex, course, faculty);
+        return line;
     }
+
+    private double inputNumber() {
+        double number;
+        Scanner sc = new Scanner(System.in);
+        for (;;) {
+            try {
+                number = sc.nextDouble();
+                if (number > 0) {
+                    break;
+                } else {
+                    System.out.println("Can't be negative or 0");
+                }
+            } catch (InputMismatchException e) {
+                sc.skip(".*");
+                System.out.println("It's not number");
+            }
+        }
+        return number;
+    }
+
 }
