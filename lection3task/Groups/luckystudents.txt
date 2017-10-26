@@ -1,0 +1,8 @@
+Student{course='4', faculty='IT'}Human{firstName='Vladimir', lastName='Belochkin', age=20, sex='male'}
+Student{course='3', faculty='Management'}Human{firstName='Anna', lastName='Petrova', age=25, sex='female'}
+Student{course='1', faculty='Culturology'}Human{firstName='Eric', lastName='Cartman', age=10, sex='male'}
+Student{course='5', faculty='Chemistry'}Human{firstName='Ivan', lastName='Vasilievich', age=35, sex='male'}
+Student{course='1', faculty='Magic'}Human{firstName='Harry', lastName='Potter', age=14, sex='male'}
+Student{course='3', faculty='Engineering'}Human{firstName='Konstantin', lastName='Verbenko', age=26, sex='male'}
+Student{course='2', faculty='Mathematical analysis'}Human{firstName='Vladislava', lastName='Pavlenko', age=21, sex='female'}
+Student{course='5', faculty='Faculty of idleness'}Human{firstName='Homer', lastName='Simpson', age=40, sex='male'}

@@ -1,3 +1,5 @@
+import java.io.File;
+
 public class Main {
     public static void main(String[] args) {
         Student student1 = new Student("Vladimir", "Belochkin", 20, "male", 4, "IT");
@@ -11,7 +13,10 @@ public class Main {
         Student student9 = new Student("Homer", "Simpson", 40, "male", 5, "Faculty of idleness");
         Student student10 = new Student("Eric", "Cartman", 10, "male", 1, "Culturology");
         Student student11 = new Student("Burry", "Borson", 18, "male", 3, "Architecture");
+        File groups = new File("Groups");
+        File testgroup = new File("Groups/testgroup.txt");
         Group luckyStudents = new Group();
+        groups.mkdir();
         luckyStudents.addToGroup(student1);
         luckyStudents.addToGroup(student2);
         luckyStudents.addToGroup(student3);
@@ -23,11 +28,20 @@ public class Main {
         luckyStudents.addToGroup(student9);
         luckyStudents.addToGroup(student10);
         luckyStudents.addToGroup(student11);
-        System.out.println(luckyStudents.searchStudent("Cartman"));
-        System.out.println(luckyStudents.searchStudent("a2dasd"));
+//        System.out.println(luckyStudents.searchStudent("Cartman"));
+//        System.out.println(luckyStudents.searchStudent("a2dasd"));
         luckyStudents.removeStudentFromGroup(student3);
         luckyStudents.removeStudentFromGroup(student8);
-        System.out.println(luckyStudents.toString());
-        System.out.println(Voenkomat.checkForRecruits(luckyStudents).toString());
+//        System.out.println(luckyStudents.toString());
+//        System.out.println(Voenkomat.checkForRecruits(luckyStudents).toString());
+//        luckyStudents.addToGroupInteractive();
+//        System.out.println(luckyStudents.getGroup()[8].toString());
+//        FileOperations.toFile(luckyStudents.getGroup(), "Groups/luckystudents.txt");
+        Group newGroup = FileOperations.toGroup(testgroup);
+        System.out.println(newGroup.toString());
+
+
+
+
     }
 }

@@ -1,0 +1,4 @@
+Vasiliy	Pupkin	19	male	1	dsamknfk
+Andrey	Bulkin	25	male	5	dijaji
+Katya	Bezrukova	21	female	2	idja2ij
+Lena	Zaiceva	33	female	 3 danjdsamk
