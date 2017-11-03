@@ -70,4 +70,26 @@ public class FileOperations {
             }
         }
     }
+
+    public static void serialize(Object object, File file) {
+        try (ObjectOutputStream oos = new ObjectOutputStream (
+                new FileOutputStream(file))) {
+            oos.writeObject(object);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static Object deserialize(File file) {
+        try (ObjectInputStream ois = new ObjectInputStream(
+                new FileInputStream(file))) {
+            Object res = ois.readObject();
+            return res;
+        } catch (IOException e) {
+            System.out.println("IO Exception");
+        } catch (ClassNotFoundException e) {
+            System.out.println("File not found");;
+        }
+        return null;
+    }
 }
