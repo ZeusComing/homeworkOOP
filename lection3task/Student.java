@@ -1,4 +1,7 @@
-public class Student extends Human implements Comparable<Student> {
+import java.io.Serializable;
+import java.util.Scanner;
+
+public class Student extends Human implements Comparable<Student>, Serializable {
     private int course;
     private String faculty;
 
@@ -34,7 +37,16 @@ public class Student extends Human implements Comparable<Student> {
                 ", faculty='" + faculty + '\'' +
                 '}' + super.toString();
     }
+    public String setLastName() {
+        String lastName = inputLine();
+        return lastName;
+    }
 
+    private String inputLine() {
+        Scanner sc = new Scanner(System.in);
+        String line = sc.nextLine();
+        return line;
+    }
     @Override
     public int compareTo(Student o) {
         return this.getLastName().compareTo(o.getLastName());

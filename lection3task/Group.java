@@ -1,8 +1,9 @@
+import java.io.*;
 import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Group implements Voenkomat {
+public class Group implements Voenkomat, Serializable {
     private Student[] group = new Student[10];
     private int count = 0;
 
@@ -186,5 +187,4 @@ public class Group implements Voenkomat {
         }
         return number;
     }
-
 }
