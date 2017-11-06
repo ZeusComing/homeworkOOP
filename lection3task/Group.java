@@ -1,36 +1,27 @@
 import java.io.*;
-import java.util.Arrays;
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import java.util.*;
 
 public class Group implements Voenkomat, Serializable {
-    private Student[] group = new Student[10];
-    private int count = 0;
+    private List<Student> group = new ArrayList<>();
 
-    public Student[] getGroup() {
+    public List<Student> getGroup() {
         return group;
     }
 
     public int getCount() {
-        return count;
+        return group.size();
     }
 
     public void addToGroup(Student student) {
         try {
             if (student == null) {
                 throw new IllegalArgumentException("Sorry");
-            } else if (count > 9) {
+            } else if (group.size() > 9) {
                 throw new MyException();
             } else {
-                for (int i = 0; i < group.length; i++) {
-                    if (group[i] == null) {
-                        group[i] = student;
-                        System.out.println(student.getFirstName() + " "
-                                + student.getLastName() + " is added to group");
-                        count++;
-                        break;
-                    }
-                }
+                group.add(student);
+                System.out.println(student.getFirstName() + " "
+                        + student.getLastName() + " is added to group");
             }
         } catch (MyException e) {
             System.out.println(e.getMessage());
@@ -43,23 +34,16 @@ public class Group implements Voenkomat, Serializable {
     }
 
     public void removeStudentFromGroup (Student student) {
-        for (int i = 0; i < group.length; i++) {
-            if (group[i].equals(student)) {
-                count--;
-                group[i] = group[count];
-                group[count] = null;
-                System.out.println("Student " + student.getLastName()
-                        + " removed from group. " + "Now group have "
-                        + (group.length - count) + " slot(s).");
-                break;
-            }
-        }
+        group.remove(student);
+        System.out.println("Student " + student.getLastName()
+                + " removed from group. " + "Now group have "
+                + (10 - group.size()) + " slot(s).");
     }
 
     public Student searchStudent(String lastName) {
-        for (int i = 0; i < count; i++) {
-            if (group[i].getLastName() == lastName) {
-                return group[i];
+        for (int i = 0; i < group.size(); i++) {
+            if (group.get(i).getLastName() == lastName) {
+                return group.get(i);
                 }
             }
         System.out.println(lastName + " not in the group");
@@ -71,19 +55,19 @@ public class Group implements Voenkomat, Serializable {
         String p = inputLine().toLowerCase();
         switch (p) {
             case ("first name"):
-                Arrays.sort(group, 0, count - 1, (studentOne, studentTwo) ->
-                        studentOne.getFirstName().compareTo(studentTwo.getFirstName()));
+                Collections.sort(group, (studentOne, studentTwo) ->
+                        studentOne.getLastName().compareTo(studentTwo.getLastName()));
                 break;
             case ("last name"):
-                Arrays.sort(group, 0, count - 1, (studentOne, studentTwo) ->
+                Collections.sort(group, (studentOne, studentTwo) ->
                         studentOne.getLastName().compareTo(studentTwo.getLastName()));
                 break;
             case ("age"):
-                Arrays.sort(group, 0, count - 1, (studentOne, studentTwo) ->
+                Collections.sort(group, (studentOne, studentTwo) ->
                         studentOne.getAge() - studentTwo.getAge());
                 break;
             case ("course"):
-                Arrays.sort(group, 0, count - 1, (studentOne, studentTwo) ->
+                Collections.sort(group, (studentOne, studentTwo) ->
                         studentOne.getCourse() - studentTwo.getCourse());
                 break;
             default:
@@ -93,10 +77,11 @@ public class Group implements Voenkomat, Serializable {
 
     @Override
     public String toString() {
-        Arrays.sort(group, 0, count-1);
+        Collections.sort(group, (studentOne, studentTwo) ->
+                studentOne.getLastName().compareTo(studentTwo.getLastName()));
         StringBuilder stringBuilder = new StringBuilder("Students list: \n");
-        for (int i = 0; i < count; i++) {
-            stringBuilder.append(group[i].getLastName() + "\n");
+        for (int i = 0; i < group.size(); i++) {
+            stringBuilder.append(group.get(i).getLastName() + "\n");
         }
         String result = stringBuilder.toString();
         return result;
