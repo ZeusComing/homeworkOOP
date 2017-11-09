@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        Map<String, String> translator = new HashMap<>();
+        Translator enUa = new Translator();
         File englishIn = new File("englishIn.txt");
         File uaOut = new File("ukrainianOut.txt");
         try {
@@ -15,9 +15,9 @@ public class Main {
             e.printStackTrace();
         }
         //FileOperations.writeToFile("hello java", englishIn);
-        translator.put("hello", "привіт");
-        translator.put("java", "джава");
-        //FileOperations.translate(englishIn, uaOut, translator);
+        enUa.getTranslator().put("hello", "привіт");
+        enUa.getTranslator().put("java", "джава");
+        //enUa.translate(englishIn, uaOut);
 
 
     }

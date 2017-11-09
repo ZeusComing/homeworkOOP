@@ -54,38 +54,4 @@ public class FileOperations {
         }
     }
 
-    public static void addToTranslatorInteractive(Map<String, String> translator) {
-        String enText;
-        String uaText;
-        try (BufferedReader br = new BufferedReader(
-                new InputStreamReader(System.in))) {
-            System.out.println("Write english word");
-            do {
-                enText = br.readLine();
-                if (enText.length() == 0) {
-                    System.out.println("Empty string. Try again");
-                }
-            } while (enText.length() == 0);
-            System.out.println("Write translate");
-            do {
-                uaText = br.readLine();
-                if (enText.length() == 0) {
-                    System.out.println("Empty string. Try again");
-                }
-            } while (uaText.length() == 0);
-            translator.put(enText, uaText);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void translate(File englistIn, File ukrainianOut, Map<String, String> translator) {
-        String[] enWords = getStringArray(englistIn);
-        StringBuilder sb = new StringBuilder();
-        for (String enWord: enWords) {
-            sb.append(translator.get(enWord) + " ");
-        }
-        writeToFile(sb.toString(), ukrainianOut);
-    }
-    
 }
